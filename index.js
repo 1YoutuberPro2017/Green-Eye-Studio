@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const botConfig = require('./confige.json');
 
 const client = new Discord.Client();
-bot.commands = new discord.Collection();
+const bot = client
+client.commands = new discord.Collection();
 
 const fs = require("fs");
 
@@ -22,7 +23,7 @@ fs.readdir("./commands/", (error, files) => {
       var fileGet = require(`./commands/${f}`);
       console.log(`De file ${f} is geladen`);
 
-      bot.commands.set(fileGet.help.name, fileGet);
+      client.commands.set(fileGet.help.name, fileGet);
 
   })
 
@@ -38,9 +39,9 @@ client.on('ready', () => {
   
 });
 
-bot.on("message", async message => {
+client.on("message", async message => {
 
-  if (message.author.bot) return;
+  if (message.author.client) return;
 
   if (message.channel.type === "dm") return message.channel.send("hi, i'm a patato");
 
@@ -56,14 +57,14 @@ bot.on("message", async message => {
 
   var arguments = messageArray.slice(1);
 
-  var commands = bot.commands.get(command.slice(prefix.length));
+  var commands = client.commands.get(command.slice(prefix.length));
 
   if (commands) commands.run(bot, message, arguments);
 
 });
 // client.on('message', message  => {
 
-//   if (message.author.bot) return;
+//   if (message.author.client) return;
 
 //   if (message.channel.type == "dm") return message.channel.send("hi, i'm a patato");
   
