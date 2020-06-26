@@ -1,50 +1,65 @@
-const discord = require("discord.js");
+const Discord = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 const fs = require("fs");
-const bot = new discord.Client();
-bot.commands = new discord.Collection();
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+const botConfig = require('../confige.json');
+const prefix = botConfig.prefix
+const commands = client.command
 
-module.exports.run = async (bot, message, arguments) => {
-    let commandSize = 0
-    let embed = new discord.RichEmbed().setColor("RANDOM")
-
-    if (!arguments[0]) {
-        let categories =
-            bot.commands
-                .map(c => c.help.category)
-                .reduce((a, b) => {
-                    if (a.indexOf(b) < 0) a.push(b)
-                    return a
-                }, []).sort()
-
-        embed.setAuthor("Commands List", message.author.avatarURL)
-        categories.forEach(c => {
-            let commands = bot.commands.filter(
-                command => command.help.category == c
-            )
-            commands = commands.map(cmd => cmd.help.name)
-            if (commands.length <= 0) return;
-            commandSize += commands.length
-            embed.addField(c, `\`${commands.sort().join("`, `")}\``)
-        })
-        embed.setFooter(`Total commands: ${commandSize}`)
-        embed.setColor("#5b0b0b")
-
-        return message.channel.send(embed)
-    } else {
-        let command = bot.commands.get(arguments[0])
-        if (!command) return message.reply("Cant find this command, sorry!")
-        command = command.help
-        embed.setAuthor(`Command help for ${command.name}`, message.author.avatarURL)
-        embed.setDescription(command.description)
-        // if (command.aliases.length >= 1) embed.addField("Aliases", `\`${command.aliases.join("`, `")}\``)
-        if (command.usage != null) embed.addField("Usage", command.usage)
-        embed.setColor("#128760")
-
-        return message.channel.send(embed)
-    }
+module.exports.run = async (client, message, args) => {
+ 
+  if (args[0]) {
+    return getCMD(client, message, args[0]);
+} else {
+    return getAll(client, message);
+}
 }
 
-module.exports.help = {
+
+function getAll(client, message) {
+const embed = new MessageEmbed()
+.setColor("RANDOM")
+
+const commands = (category) => {
+return client.commands
+    .filter(cmd => cmd.category === category)
+    .map(cmd => `- \`${cmd.name}\``)
+    .join("\n");
+}
+
+const info = client.categories
+.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
+.reduce((string, category) => string + "\n" + category);
+
+return message.channel.send(embed.setDescription(info));
+}
+
+function getCMD(client, message, input) {
+const embed = new MessageEmbed()
+
+const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
+
+let info = `No information found for command **${input.toLowerCase()}**`;
+
+if (!cmd) {
+return message.channel.send(embed.setColor("RED").setDescription(info));
+}
+
+if (cmd.name) info = `**Command name**: ${cmd.name}`;
+if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
+if (cmd.description) info += `\n**Description**: ${cmd.description}`;
+if (cmd.usage) {
+info += `\n**Usage**: ${cmd.usage}`;
+embed.setFooter(`Syntax: <> = required, [] = optional`);
+}
+
+return message.channel.send(embed.setColor("GREEN").setDescription(info));
+
+
+}
+  
+  module.exports.config = {
     name: "help",
     aliases: ["h"],
     description: "Shows all bot commands.",
