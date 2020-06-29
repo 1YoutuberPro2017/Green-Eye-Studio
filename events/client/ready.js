@@ -12,9 +12,9 @@ module.exports = bot => {
     let activities = [ `${bot.guilds.cache.size} servers!`, `${bot.channels.cache.size} channels!`, `${bot.users.cache.size} users!` ], i = 0;
     setInterval(() => bot.user.setActivity(`${token.prefix}help | ${activities[i++ % activities.length]}`, { type: "WATCHING" }), 15000);
 
-    // let choices = ["i'm back from the dead!", "its good to be alive.", "what breed of dog can jump higher than buildings? The answer is any dog, because buildings cannot jump."]
-    //     let response = choices[Math.floor(Math.random() * choices.length)]
+    let choices = ["i'm back from the dead!", "its good to be alive.", "what breed of dog can jump higher than buildings? The answer is any dog, because buildings cannot jump."]
+        let response = choices[Math.floor(Math.random() * choices.length)]
 
-    // bot.channels.cache.get("725829820579184735").send(`${response}`)
+    bot.channels.cache.get("725829820579184735").send(`${response}`)
 
 };
