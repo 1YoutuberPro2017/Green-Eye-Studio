@@ -38,7 +38,7 @@ module.exports = {
     run: async (bot, message, args) => {
 
     function duration(ms) {
-        const totalSec = (bot.uptime/1000)
+        var totalSec = (bot.uptime/1000)
         const days = Math.floor(totalSec/86400).toString()
         const hrs = Math.floor(totalSec/3600).toString()
         totalSec %= 3600
