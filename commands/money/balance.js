@@ -6,14 +6,14 @@ module.exports = {
         name: "balance",
         description: "",
         usage: "",
-        category: "moneys",
+        category: "money",
         accessableby: "Members",
         aliases: ["bal"]
     },
     //-----------------[run command]-----------------
     run: async (bot, message, args) => {
 
-    message.channel.send(`${botconfig}`)
+    message.channel.send(`${botconfig.prefix}`)
 
     }
 }
