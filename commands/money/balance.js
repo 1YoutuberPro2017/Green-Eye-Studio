@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const botconfig = require(".../botconfig.json")
+const botconfig = require("../../botconfig.json")
 
 module.exports = {
     config: {
