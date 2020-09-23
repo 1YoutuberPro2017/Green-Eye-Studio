@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
+const Guild = require('../../models/guild');
 
 module.exports = {
     name: 'commands',
