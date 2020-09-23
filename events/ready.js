@@ -12,5 +12,5 @@ module.exports = client => {
     client.user.setPresence({
         status: 'dnd',
     });
-    console.log(`${client.user.username} is online in ${client.guilds.cache.size} and helping ${client.users.cache.size}`);
+    console.log(`${client.user.username} is online in ${client.guilds.cache.size} servers and helping ${client.users.cache.size}users`);
 }
