@@ -1,27 +1,27 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
-    config: {
-        name: "say",
-        description: "sends a message that was inputted to a channel",
-        usage: "!say",
-        category: "moderation",
-        accessableby: "Staff",
-        aliases: ["acc", "announcement"]
-    },
-    run: async (bot, message, args) => {
+    name: 'say',
+    category: 'moderation',
+    description: 'Bot repeats what you tell it to.',
+    usage: `say`,
+    run: (client, message, args) => {
+        message.delete()
 
-    if(!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"])) return message.channel.send("You can not use this command!")
-    
-    let argsresult;
-    let mChannel = message.mentions.channels.first()
+        if (!message.member.hasPermission('MANAGE_MESSAGES'))
+            return message.channel.send('You do not have permission to use this command.').then(m => m.delete({timeout: 5000}));
+        
+        if (args.length < 1)
+            return message.channel.send('You must specify something for the bot to repeat!').then(m => m.delete({timeout: 5000}));
 
-    message.delete()
-    if(mChannel) {
-        argsresult = args.slice(1).join(" ")
-        mChannel.send(argsresult)
-    } else {
-        argsresult = args.join(" ")
-        message.channel.send(argsresult)
-    }
+        if (args[0].toLowerCase() === 'embed') {
+            const embed = new MessageEmbed()
+                .setColor(process.env.COLOR)
+                .setDescription(args.slice(1).join(' '))
 
+            message.channel.send(embed);
+        } else {
+            message.channel.send(args.join(' '));
+        }
     }
 }
