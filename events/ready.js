@@ -12,5 +12,5 @@ module.exports = client => {
     client.user.setPresence({
         status: 'dnd',
     });
-    console.log(`${bot.user.username} is online`);
+    console.log(`${client.user.username} is online`);
 }
