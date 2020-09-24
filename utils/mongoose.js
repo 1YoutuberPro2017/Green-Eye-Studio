@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const {Client} = require('discord.js');
+const client = new Client();
 
 module.exports = {
     init: () => {
