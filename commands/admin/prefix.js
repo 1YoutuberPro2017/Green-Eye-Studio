@@ -27,7 +27,7 @@ module.exports = {
                 })
 
                 newGuild.save()
-                .then(result => console.log(result))
+                //.then(result => console.log(result))
                 .catch(err => console.error(err));
 
                 return message.channel.send('This server was not in our database! We have added it, please retype this command.').then(m => m.delete({timeout: 10000}));

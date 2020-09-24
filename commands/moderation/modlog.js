@@ -32,7 +32,7 @@ module.exports = {
                 });
 
                 await newGuild.save()
-                .then(result => console.log(result))
+                //.then(result => console.log(result))
                 .catch(err => console.error(err));
 
                 return message.channel.send(`The mod lgos channel has been set to ${channel}`);
@@ -40,7 +40,7 @@ module.exports = {
                 guild.updateOne({
                     logChannelID: channel.id
                 })
-                .then(result => console.log(result))
+                //.then(result => console.log(result))
                 .catch(err => console.error(err));
 
                 return message.channel.send(`The mod lgos channel has been set to ${channel}`);

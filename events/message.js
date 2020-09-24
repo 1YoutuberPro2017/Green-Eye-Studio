@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
             })
 
             newGuild.save()
-            .then(result => console.log(result))
+            //.then(result => console.log(result))
             .catch(err => console.error(err));
 
             return message.channel.send('This server was not in our database! We have now added and you should be able to use bot commands.').then(m => m.delete({timeout: 10000}));
