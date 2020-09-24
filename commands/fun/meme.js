@@ -23,8 +23,7 @@ module.exports = {
         embed.setImage(memeImage);
         embed.setFooter(`👍 ${memeUpvotes} 👎 ${memeDownvotes} 💬 ${memeNumComments}`);
         message.channel.send(embed)
-            .then(sent => console.log(`Sent a reply to ${sent.author.username}`))
-        console.log('Bot responded with: ' + memeImage);
+
     }).catch(console.error);
 
     }
