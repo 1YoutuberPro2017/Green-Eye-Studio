@@ -1,4 +1,4 @@
-const { env } = require("process");
+const mongoose = require('mongoose');
 
 module.exports = client => {
     let activities = [`${client.guilds.cache.size} servers!`, `${client.channels.cache.size} channels!`, `${client.users.cache.size} users!`], i = 0;
