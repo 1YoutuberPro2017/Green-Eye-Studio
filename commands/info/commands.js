@@ -41,7 +41,7 @@ async function getAll(client, message) {
     .setColor(process.env.COLOR)
     .setTitle('Command List')
     .setThumbnail(client.user.avatarURL())
-    .setFooter(`Created by ${message.author.name}`)
+    .setFooter(`Created by ${message.author.user}`)
     
     const commands = (category) => {
         return client.commands
