@@ -1,10 +1,11 @@
 const got = require('got');
 
 module.exports = {
-    name: 'ping',
-    category: 'info',
-    description: 'Returns bot and API latency in milliseconds.',
-    usage: `ping`,
+    name: 'meme',
+    aliases: ['plss meme', 'plss'],
+    category: 'fun',
+    description: '',
+    usage: `meme`,
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
 
