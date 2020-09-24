@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const {Client} = require('discord.js');
-const client = new Client();
 
 module.exports = {
     init: () => {
@@ -21,17 +19,14 @@ module.exports = {
 
         mongoose.connection.on('connected', () => {
             console.log('Mongoose has successfully connected!');
-            client.channels.cache.get("725829820579184735").send(`Mongoose has successfully connected!`);
         });
 
         mongoose.connection.on('err', err => {
             console.error(`Mongoose connection error: \n${err.stack}`);
-            client.channels.cache.get("725829820579184735").send(`Mongoose connection error: \n${err.stack}`);
         });
 
         mongoose.connection.on('disconnected', () => {
             console.warn('Mongoose connection lost');
-            client.channels.cache.get("725829820579184735").send(`Mongoose connection lost`);
         });
     }
 }
