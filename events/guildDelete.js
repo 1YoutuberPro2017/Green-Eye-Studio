@@ -6,6 +6,5 @@ module.exports = async (client, guild) => {
         guildID: guild.id
     }, (err, res) => {
         if(err) console.error(err)
-        console.log('I have been removed from a server!');
     });
 };

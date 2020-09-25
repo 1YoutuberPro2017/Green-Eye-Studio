@@ -4,10 +4,11 @@ module.exports = client => {
     let activities = [`${client.guilds.cache.size} servers!`, `${client.channels.cache.size} channels!`, `${client.users.cache.size} users!`], i = 0;
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 15000);
 
-    let choices = ["i'm back from the dead!", "its good to be alive."]
-    let response = choices[Math.floor(Math.random() * choices.length)]
+    // let choices = ["i'm back from the dead!", "its good to be alive."]
+    // let response = choices[Math.floor(Math.random() * choices.length)]
 
-    client.channels.cache.get("725829820579184735").send(`${response}`)
+    // client.channels.cache.get("725829820579184735").send(`${response}`)
 
-    console.log(`${client.user.username} is online in ${client.guilds.cache.size} servers and helping ${client.users.cache.size} users`);
+
+    console.log(`---------------------------------------------------------------------------------------------------------------------\n\n-------> \u001b[34m${client.user.username}\u001b[0m is \u001b[32monline\u001b[0m in ${client.guilds.cache.size} servers and helping ${client.users.cache.size} users\n\n---------------------------------------------------------------------------------------------------------------------`);
 }
