@@ -10,5 +10,5 @@ module.exports = client => {
     // client.channels.cache.get("725829820579184735").send(`${response}`)
 
 
-    console.log(`---------------------------------------------------------------------------------------------------------------------\n\n-------> \u001b[34m${client.user.username}\u001b[0m is \u001b[32monline\u001b[0m in ${client.guilds.cache.size} servers and helping ${client.users.cache.size} users\n\n---------------------------------------------------------------------------------------------------------------------`);
+    console.log(`---------------------------------------------------------------------------------------------------------------------\n\n-------> ${client.user.username} is online in ${client.guilds.cache.size} servers and helping ${client.users.cache.size} users\n\n---------------------------------------------------------------------------------------------------------------------`);
 }
