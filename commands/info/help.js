@@ -46,7 +46,7 @@ async function helpMSG(client, message) {
         .setTitle('Discord.js Tutorials')
         .setThumbnail(client.user.avatarURL())
         .setDescription(`For a full list of commands, please type \`${guildDB.prefix}commands\` \n\nTo see more info about a specific command, please type \`${guildDB.prefix}help <command>\` without the \`<>\``)
-        .setFooter('Created by ${message.author.username}');
+        .setFooter(`Created by ${message.author.username}`);
     message.channel.send(embed);
 }
 

@@ -4,14 +4,23 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = async (client, message) => {
     if (message.author.bot) return;
+    if (message.guild.id === "509635817015083018") {
+        if (message.attachments.size > 0) {
+            message3 = `--image--\n ${message}`
+        } else {
+            message3 = message
+        }
 
-    const embed = new MessageEmbed()
-        .setColor('RANDOM')
-        .setTitle(`${message.guild.name}`)
-        .setThumbnail(message.author.avatarURL())
-        .addField(message.author.username, message)
-    // .setTimestamp();
-    client.channels.cache.get("510061374622400513").send(embed)
+        const embed = new MessageEmbed()
+            .setColor('RANDOM')
+            .setTitle(`${message.guild.name}`)
+            .setThumbnail(message.author.avatarURL())
+            .addField(message.channel.name, message.author.username)
+            .addField('message: ' + `${message3}`, `-Chat log-`)
+            .setTimestamp();
+        client.channels.cache.get("510061374622400513").send(embed)
+    };
+
 
     const settings = await Guild.findOne({
         guildID: message.guild.id
