@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Guild = require('../models/guild');
 const { MessageEmbed } = require('discord.js');
+const got = require('got');
 
 module.exports = async (client, message) => {
     if (message.author.bot) return;
@@ -43,6 +44,33 @@ module.exports = async (client, message) => {
         }
     });
 
+
+    //--meme code zonder commands--
+    const args4 = message.content.slice().trim().split(/ +/g);
+
+    if (message.content.startsWith("plss meme", "meme plss")) {
+        if (!args4[2]) {
+            const meme = new MessageEmbed()
+
+            got('https://www.reddit.com/r/memes/random/.json').then(response => {
+                let content = JSON.parse(response.body);
+                let permalink = content[0].data.children[0].data.permalink;
+                let memeUrl = `https://reddit.com${permalink}`;
+                let memeImage = content[0].data.children[0].data.url;
+                let memeTitle = content[0].data.children[0].data.title;
+                let memeUpvotes = content[0].data.children[0].data.ups;
+                let memeDownvotes = content[0].data.children[0].data.downs;
+                let memeNumComments = content[0].data.children[0].data.num_comments;
+                meme.addField(`${memeTitle}`, `[View thread](${memeUrl})`);
+                meme.setImage(memeImage);
+                meme.setFooter(`👍 ${memeUpvotes} 👎 ${memeDownvotes} 💬 ${memeNumComments}`);
+                message.channel.send(meme)
+
+            }).catch(console.error);
+        }
+    }
+
+
     const prefix = settings.prefix;
 
     if (!message.guild) return;
@@ -61,4 +89,5 @@ module.exports = async (client, message) => {
 
     if (command)
         command.run(client, message, args);
+
 };
