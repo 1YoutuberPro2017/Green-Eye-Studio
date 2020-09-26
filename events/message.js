@@ -48,7 +48,7 @@ module.exports = async (client, message) => {
     //--meme code zonder commands--
     const args4 = message.content.slice().trim().split(/ +/g);
 
-    if (message.content.startsWith("plss meme", "meme plss")) {
+    if (message.content.startsWith("plss meme")) {
         if (!args4[2]) {
             const meme = new MessageEmbed()
 
